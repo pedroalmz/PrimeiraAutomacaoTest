@@ -1,48 +1,43 @@
 import pyautogui as pa
 import time
-import pyperclip
+
 pa.PAUSE = 0.3
+
+# Ask for MICRO number FIRST
+numero = input("Digite a numeração para o MICRO (ex: 171): ")
+nome_pc = f"MICRO{numero}"
+print(f"Nome do PC definido: {nome_pc}")
 
 print("Abrindo Propriedades do Sistema...")
 pa.hotkey('win', 'r')
 pa.write('sysdm.cpl')
-pa.press('ENTER')
+pa.press('enter')
 time.sleep(1)
 
-print("Navegando para Alterar Nome...")
+print("Navegando para aba Alterações/Domínio...")
 pa.press('tab')
 pa.press('tab')
 pa.press('enter')
 time.sleep(2)
 
-nome_pc = "MICRO171"
-print("Nome do PC definido: MICRO171")
-
-print("Preenchendo campos...")
-# Primeiro selecionar rádio Domínio (ativa campo nome)
-pa.press('tab')  # Para rádio Member of
-pa.press('space')  # Alterna radios se necessário
-time.sleep(0.5)
-pa.press('tab')  # Para sub-radio Domain
-pa.press('space')  # Seleciona Domain
-time.sleep(0.5)
-pa.press('tab')  # Para campo Domínio
+print("Preenchendo campos (Domínio Japi.local fixo, Nome MICRO{numero})...")
+# Assume focus starts near top; tab to Membro de / Domínio field (~3 tabs)
+pa.press('tab', presses=3)
 pa.hotkey('ctrl', 'a')
 pa.press('delete')
 pa.write('Japi.local')
 time.sleep(0.5)
 
-# Agora campo Nome do Computador ativado, tab pra ele
-pa.press('shift+tab')  # Volta pro Nome do Computador
+# Shift-tab back to Nome do Computador (usually adjacent)
+pa.press('shift+tab')
 pa.hotkey('ctrl', 'a')
 pa.press('delete')
 pa.write(nome_pc)
 
-# Tab para OK e confirmar
-pa.press('tab')
+# Tab to OK button(s)
+pa.press('tab', presses=2)
 pa.press('enter')
 time.sleep(1)
 
-# Possível prompt de confirmação/UAC
-print("Confirmando alterações (pressione OK se aparecer UAC)...")
-time.sleep(3)  # Tempo para usuário confirmar UAC/reboot prompt
+print("Confirmando alterações (pressione OK se UAC/reboot prompt aparecer)...")
+time.sleep(3)
