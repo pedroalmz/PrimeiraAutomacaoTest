@@ -15,24 +15,28 @@ pa.press('tab')
 pa.press('enter')
 time.sleep(2)
 
-numero = input("Qual o número desejado para o MICRO? ")
-nome_pc = f"MICRO{numero}"
-print(f"Nome do PC definido: {nome_pc}")
+nome_pc = "MICRO171"
+print("Nome do PC definido: MICRO171")
 
 print("Preenchendo campos...")
-# Foco no campo Nome do Computador (geralmente primeiro editable após dialog abrir)
-pa.press('tab')  # Navega para Nome do Computador se necessário
+# Primeiro selecionar rádio Domínio (ativa campo nome)
+pa.press('tab')  # Para rádio Member of
+pa.press('space')  # Alterna radios se necessário
 time.sleep(0.5)
-pa.hotkey('ctrl', 'a')  # Seleciona tudo
-pa.press('delete')
-pa.write(nome_pc)
-
-# Tab para Domínio
-pa.press('tab')
+pa.press('tab')  # Para sub-radio Domain
+pa.press('space')  # Seleciona Domain
 time.sleep(0.5)
+pa.press('tab')  # Para campo Domínio
 pa.hotkey('ctrl', 'a')
 pa.press('delete')
 pa.write('Japi.local')
+time.sleep(0.5)
+
+# Agora campo Nome do Computador ativado, tab pra ele
+pa.press('shift+tab')  # Volta pro Nome do Computador
+pa.hotkey('ctrl', 'a')
+pa.press('delete')
+pa.write(nome_pc)
 
 # Tab para OK e confirmar
 pa.press('tab')

@@ -1,8 +1,8 @@
 @echo off
-title Automacao Mudanca Nome PC - MICRO + Numero
+title Automacao Mudanca Nome PC - MICRO171
 echo ========================================
 echo Automacao para alterar nome do computador
-echo Padrao: MICRO + numero ^(ex: MICRO450^)
+echo Padrao: MICRO171
 echo ========================================
 echo.
 
